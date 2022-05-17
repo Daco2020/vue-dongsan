@@ -3,8 +3,8 @@
   
   <div class="black-bg" v-if="isShowModal">
     <div class="white-bg">
-      <h4>상세</h4>
-      <p>상세내용</p>
+      <h4>{{products[currentProduct].title}}</h4>
+      <p>{{products[currentProduct].content}}</p>
       <button @click="modalOff">창 닫기</button>
     </div>
   </div>
@@ -15,7 +15,7 @@
   
   <div v-for="product, i in products" :key="i">
     <img :src="product.image" class="room-img">
-    <h4 @click="modalOn">{{ product.title }}</h4>
+    <h4 @click="modalOn(), currentProduct = i" >{{ product.title }}</h4>
     <p>{{ product.price }} 원</p>
     <button @click="increaseReport(i)">허위매물신고</button>
     <span> 신고수 : {{reportCount[i]}}</span>
@@ -34,8 +34,8 @@ export default {
       isShowModal : false,
       reportCount : [0,0,0,0,0,0],
       menus : ["Home", "Product", "About"],
-      locals : {역삼동원룸:50, 천호동원룸:60, 마포구원룸:70, 광진구원룸:80},
       products: mockData,
+      currentProduct : 0,
     }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
   },
   methods : {
