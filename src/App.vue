@@ -1,17 +1,13 @@
 <template>
   <div>
-  
-  <div class="black-bg" v-if="isShowModal">
-    <div class="white-bg">
-      <h4>{{products[currentProduct].title}}</h4>
-      <p>{{products[currentProduct].content}}</p>
-      <button @click="modalOff">창 닫기</button>
-    </div>
-  </div>
-  
+
+  <modal :products="products" :currentProduct="currentProduct" :isShowModal="isShowModal" :modalOff="modalOff"/>
+
   <div class="menu">
     <a v-for="(v,i) in menus" :key="i">{{ v }}</a>
   </div>
+
+  <discount/>
   
   <div v-for="product, i in products" :key="i">
     <img :src="product.image" class="room-img">
@@ -20,12 +16,17 @@
     <button @click="increaseReport(i)">허위매물신고</button>
     <span> 신고수 : {{reportCount[i]}}</span>
   </div>
+
+
+
   </div>
 </template>
 
 <script>
 
 import mockData from './assets/mockData.js';
+import Discount from './Discount.vue';
+import Modal from './Modal.vue';
 
 export default {
   name: 'App',
@@ -50,6 +51,8 @@ export default {
     }
   },
   components: {
+    discount : Discount,
+    modal : Modal,
   },
 }
 </script>
@@ -72,8 +75,6 @@ div {
   padding: 20px;
 }
 
-
-
 .room-img {
   width: 50%;
   margin-top: 40px;
@@ -88,7 +89,7 @@ div {
 }
 
 .menu {
-  background: tomato;
+  background: seagreen;
   padding: 15px;
   border-radius:5px;
 
